@@ -52,7 +52,9 @@ namespace WebHook
             await outputQueueItem.AddAsync(order);
             await orderTable.AddAsync(table);
 
-            return new CreatedResult("/api/route", $"Thank you for your order! Your order {order.ProductId} will be sent & and a confirmation will be sent to email {order.ToEmail}."); //ObjectResult($"Traffic == {order.Email}");
+            return new CreatedResult(
+                "/api/route", $"Thank you for your order! Your order {order.ProductId} " +
+                $"will be sent & and a confirmation will be sent to email {order.ToEmail}.");
         }
     }
 }

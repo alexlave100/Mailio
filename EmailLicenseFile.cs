@@ -38,9 +38,11 @@ namespace WebHook
             OrderTable orderTable, 
             string myBlob )
         {
-            outgoingBodies.Add(new Content("text/plain", "This email is sent because an Azure serverless function was succesfully execeuted!\n\n Blob size: " + myBlob.Length * 2 + "bytes"));
-            recipients.Add(new EmailAddress(orderTable.ToEmail));
+            outgoingBodies.Add(new Content(
+                "text/plain", "This email is sent because an Azure serverless function" +
+                " was succesfully execeuted!\n\n Blob size: " + myBlob.Length * 2 + "bytes"));
 
+            recipients.Add(new EmailAddress(orderTable.ToEmail));
             mailMessage.AddTos(recipients);
             mailMessage.AddContents(outgoingBodies);
             mailMessage.SetFrom(new EmailAddress(orderTable.FromEmail));
