@@ -1,4 +1,4 @@
-## Mailio
+# Azure serverless functions
 
 Simple example of common bindings and their use cases when deploying Azure functions
 
