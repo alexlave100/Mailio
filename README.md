@@ -12,11 +12,11 @@ For the SendGrid implementation, don't forget to create a SendGrid API Key and u
 The local.settings.json must also be added and configured if running the functions locally.
 ### Example: 
     {
-  "IsEncrypted": false,
-  "Values": {
-    "AzureWebJobsSendGridApiKey": <ApiKey>,
-    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-    "FUNCTIONS_WORKER_RUNTIME": "dotnet"
-  },
-  "ConnectionStrings": {}
-}
+        "IsEncrypted": false,
+        "Values": {
+         "AzureWebJobsSendGridApiKey": <ApiKey>,
+         "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+         "FUNCTIONS_WORKER_RUNTIME": "dotnet"
+         },
+    "ConnectionStrings": {}
+    }
