@@ -7,7 +7,7 @@ For the SendGrid implementation, don't forget to create a SendGrid Api Key and u
 
 
 
-#### The local.settings.json must also be added and configured if running the functions locally. The 'AzureWebJobsStorage' key value must be set to 'true' and the 'AzureWebJobsSendGridApiKey' must contain a valid Api key. 
+##### The local.settings.json must also be added and configured if running the functions locally. The 'AzureWebJobsStorage' key value must be set to 'true' and the 'AzureWebJobsSendGridApiKey' must contain a valid Api key. 
 ### Example: 
     {
         "IsEncrypted": false,
