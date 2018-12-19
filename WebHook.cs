@@ -21,6 +21,7 @@ namespace WebHook
         public string ProductId { get; set; }
         public string ToEmail { get; set; }
         public string FromEmail { get; set; }
+        public string Message { get; set; }
         public string Price { get; set; }
     }
     public class Order
@@ -29,6 +30,7 @@ namespace WebHook
         public string ProductId { get; set; }
         public string ToEmail { get; set; }
         public string FromEmail { get; set; }
+        public string Message { get; set; }
         public string Price { get; set; }
     }
     public static class WebHook
@@ -36,7 +38,7 @@ namespace WebHook
         [FunctionName("Start_WebHook")]
         public static async Task<object> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = "create")] HttpRequest req, ILogger log, 
-            [Queue("outputQueueItem", Connection = "AzureWebJobsStorage")] IAsyncCollector<Order> outputQueueItem, 
+            [Queue("outputQueueItem", Connection = "AzureWebJobsStorage")] IAsyncCollector<Order> outQueue, 
             [Table("orders", Connection = "AzureWebJobsStorage")] IAsyncCollector<OrderTable> orderTable)
         {
             log.LogInformation($"Orderinfo received");
@@ -49,7 +51,7 @@ namespace WebHook
 
             log.LogInformation($"Order {order.OrderId} recevied from {order.FromEmail} for product {order.ProductId}");
 
-            await outputQueueItem.AddAsync(order);
+            await outQueue.AddAsync(order);
             await orderTable.AddAsync(table);
 
             return new CreatedResult(

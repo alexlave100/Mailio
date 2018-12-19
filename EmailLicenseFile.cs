@@ -16,7 +16,7 @@ namespace WebHook
     public static class EmailLicenseFile
     {
         [FunctionName("EmailLicenseFile")]
-        public static void Run([BlobTrigger("licenses/{filename}.lic", Connection = "AzureWebJobsStorage")]string myBlob, 
+        public static void Run([BlobTrigger("licenses/{filename}.lic", Connection = "AzureWebJobsStorage")]string blob, 
             string filename, 
             IBinder binder,
             ILogger log,
@@ -26,9 +26,9 @@ namespace WebHook
             var outgoingBodies = new List<Content>();
             var recipients = new List<EmailAddress>();
             mailMessage = new SendGridMessage();
-            log.LogInformation($"C# Blob trigger function Processed blob\n Name:{filename} \n Size: {myBlob.Length*2} Bytes");
+            log.LogInformation($"C# Blob trigger function Processed blob\n Name:{filename} \n Size: {blob.Length*2} Bytes");
 
-            CreateCompleteEmail(outgoingBodies, recipients, mailMessage, orderTable, myBlob);
+            CreateCompleteEmail(outgoingBodies, recipients, mailMessage, orderTable, blob);
         }
 
         public static void CreateCompleteEmail (
@@ -39,8 +39,7 @@ namespace WebHook
             string myBlob )
         {
             outgoingBodies.Add(new Content(
-                "text/plain", "This email is sent because an Azure serverless function" +
-                " was succesfully execeuted!\n\n Blob size: " + myBlob.Length * 2 + "bytes"));
+                "text/plain", orderTable.Message + "\n\n" + "Blob size: " + myBlob.Length * 2 + "bytes"));
 
             recipients.Add(new EmailAddress(orderTable.ToEmail));
             mailMessage.AddTos(recipients);
