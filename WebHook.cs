@@ -55,7 +55,7 @@ namespace WebHook
             await orderTable.AddAsync(table);
 
             return new CreatedResult(
-                "/api/route", $"Thank you for your order! Your order {order.ProductId} " +
+                "/api/route", $"Thank you for your order! Your order with order number {order.ProductId} " +
                 $"will be sent & and a confirmation will be sent to email {order.ToEmail}.");
         }
     }
