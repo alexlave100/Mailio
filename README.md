@@ -3,7 +3,6 @@
 Example of common bindings and their use cases when developing Azure functions from VS17.
 
 
-
 The program will execute an HTTP triggered function (WebHook.cs) when a POST request is made and add information into a queue and a table storage. Another azfunc (GenerateLicenseFile.cs) will be triggered when a new item is added to the queue. This queue item will be added to blob storage. Whenever a new item is added to the blob storage, a blob triggered function (EmailLicenseFile.cs) will execute. This function will retrieve the desired row from table storage for the email address of the sender and receiver of the request, create a new Email object (SendGridMessage) and send it, along with some additional information about the send data and a message, to the receiver email address.
 
 ## POST request:
